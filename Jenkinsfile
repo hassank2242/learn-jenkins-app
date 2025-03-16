@@ -1,10 +1,13 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'node:14' // Runs the pipeline in a Node.js 14 container
+        }
+    }
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                sh 'whoami'
+                sh 'node -v' // Runs inside the container
             }
         }
     }
