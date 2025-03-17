@@ -30,6 +30,8 @@ pipeline {
                 sh '''
                 node -v
                 ls -la
+                test -f build/index.html
+                npm test
                 '''
             }
         }
