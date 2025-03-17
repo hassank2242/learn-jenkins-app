@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     stages {
-        
         stage('Build') {
             agent {
                 docker {
-                    image 'node:14' // Runs only this stage inside a Node.js 14 container
+                    image 'node:14'
+                    reuseNode true // Reuses the same workspace
                 }
             }
             steps {
@@ -18,11 +18,12 @@ pipeline {
                 '''
             }
         }
-           
+
         stage('Test') {
             agent {
                 docker {
-                    image 'node:14' // Runs only this stage inside a Node.js 14 container
+                    image 'node:14'
+                    reuseNode true // Reuses the same workspace
                 }
             }
             steps {
@@ -32,6 +33,5 @@ pipeline {
                 '''
             }
         }
-
     }
 }
