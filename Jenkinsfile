@@ -1,13 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14' // Runs the pipeline in a Node.js 14 container
-        }
-    }
+    agent any
+
     stages {
-        stage('Build') {
+        stage('Hello') {
             steps {
-                sh 'node -v' // Runs inside the container
+                sh 'whoami' // Runs on the Jenkins agent
+            }
+        }
+        stage('Run inside Docker') {
+            agent {
+                docker {
+                    image 'node:14' // Runs only this stage inside a Node.js 14 container
+                }
+            }
+            steps {
+                sh 'node -v' // Executes inside the container
             }
         }
     }
